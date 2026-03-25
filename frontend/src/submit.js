@@ -10,29 +10,39 @@
 // }
 
 
+
+import { useStore } from './store';
+
 export const SubmitButton = () => {
-    return (
-        <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: '20px'
-        }}>
-            <button
-                type="submit"
-                style={{
-                    padding: "10px 20px",
-                    borderRadius: "8px",
-                    border: "none",
-                    background: "#2563eb",
-                    color: "white",
-                    fontWeight: "600",
-                    cursor: "pointer",
-                    boxShadow: "0 4px 10px rgba(0,0,0,0.2)"
-                }}
-            >
-                Submit
-            </button>
-        </div>
-    );
+  const { nodes, edges } = useStore();
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/pipelines/parse', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nodes, edges }),
+      });
+
+      const data = await response.json();
+
+      alert(`
+Nodes: ${data.num_nodes}
+Edges: ${data.num_edges}
+Is DAG: ${data.is_dag}
+      `);
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Something went wrong!');
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+      <button onClick={handleSubmit}>Submit Pipeline</button>
+    </div>
+  );
 };

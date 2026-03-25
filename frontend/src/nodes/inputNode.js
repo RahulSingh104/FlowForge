@@ -1,9 +1,10 @@
-// inputNode.js
+//input node 
 
 import { useState } from 'react';
 import { Handle, Position } from 'reactflow';
+import BaseNode from './BaseNode';
 
-export const InputNode = ({ id, data }) => {
+ const InputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(data?.inputName || id.replace('customInput-', 'input_'));
   const [inputType, setInputType] = useState(data.inputType || 'Text');
 
@@ -16,10 +17,7 @@ export const InputNode = ({ id, data }) => {
   };
 
   return (
-    <div style={{width: 200, height: 80, border: '1px solid black'}}>
-      <div>
-        <span>Input</span>
-      </div>
+    <BaseNode title="Input">
       <div>
         <label>
           Name:
@@ -37,65 +35,14 @@ export const InputNode = ({ id, data }) => {
           </select>
         </label>
       </div>
+
       <Handle
         type="source"
         position={Position.Right}
         id={`${id}-value`}
       />
-    </div>
+    </BaseNode>
   );
-}
+};
 
-
-
-// import BaseNode from "./BaseNode";
-
-// const InputNode = () => {
-//   return (
-//     <BaseNode
-//       title="Input"
-//       inputs={[]}
-//       outputs={["output"]}
-//     >
-//       <div>Input Node</div>
-//     </BaseNode>
-//   );
-// };
-
-
-// export default InputNode;
-
-// import { useState } from 'react';
-// import BaseNode from "./BaseNode";
-
-// export const InputNode = ({ id, data }) => {
-//   const [currName, setCurrName] = useState(
-//     data?.inputName || id.replace('customInput-', 'input_')
-//   );
-
-//   const [inputType, setInputType] = useState(
-//     data?.inputType || 'Text'
-//   );
-
-//   return (
-//     <BaseNode
-//       id={id}
-//       title="Input"
-//       inputs={[]}
-//       outputs={["value"]}
-//     >
-//       <label>
-//         Name:
-//         <input value={currName} onChange={(e) => setCurrName(e.target.value)} />
-//       </label>
-
-//       <label>
-//         Type:
-//         <select value={inputType} onChange={(e) => setInputType(e.target.value)}>
-//           <option value="Text">Text</option>
-//           <option value="File">File</option>
-//         </select>
-//       </label>
-//     </BaseNode>
-//   );
-// }; 
+export default InputNode;
