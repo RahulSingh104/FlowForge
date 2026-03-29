@@ -1,29 +1,3 @@
-// const BaseNode = ({ title, children }) => {
-//   return (
-//     <div style={styles.node}>
-//       <div style={styles.header}>{title}</div>
-//       <div>{children}</div>
-//     </div>
-//   );
-// };
-
-// const styles = {
-//   node: {
-//     width: 200,
-//     minHeight: 100,
-//     border: "1px solid black",
-//     padding: 8,
-//     borderRadius: 6,
-//     background: "#fff",
-//   },
-//   header: {
-//     fontWeight: "bold",
-//     marginBottom: 5,
-//   },
-// };
-
-// export default BaseNode;
-
 const BaseNode = ({ title, children,icon }) => {
   return (
     <div
